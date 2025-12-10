@@ -46,3 +46,11 @@ jobs:
           git add data.db last_update.txt || true
           git commit -m "Automated DB update: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" || echo "No changes to commit"
           git push origin HEAD:price-updates --force
+
+      # Merge updated files to main branch
+      - name: Merge updated files to main
+        run: |
+          git fetch origin main
+          git checkout main
+          git merge --no-ff origin/price-updates -m "Sync updated database and timestamp"
+          git push origin main
