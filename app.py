@@ -8,4 +8,13 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     
-    return render_template("index.html")
+    db = sqlite3.connect("data.db")
+    curs = db.cursor()
+
+    curs.execute("""SELECT * FROM info
+                    JOIN prices ON info.id = prices.id""")
+
+    stations = curs.fetchall()
+    db.close()
+
+    return render_template("index.html", stations=stations)

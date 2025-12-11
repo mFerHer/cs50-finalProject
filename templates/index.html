@@ -27,10 +27,25 @@
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Example marker
-        L.marker([40.4168, -3.7038]).addTo(map)
-            .bindPopup('Center of Spain')
-            .openPopup();
+        // Stations data from Flask
+        const stations = [
+            {% for station in stations %}
+            {
+                name: "{{ station['name'] }}",
+                address: "{{ station['address'] }}",
+                timetable: "{{ station['timetable'] }}",
+                lat: "{{ station['latitude'] }}",
+                lng: "{{ station['longitude'] }}"
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ];
+
+        // Add markers for each station
+        stations.forEach(station => {
+            L.marker([station.lat, station.lng]).addTo(map)
+                .bindPopup(`<b>${station.name}</b><br>${station.address}<br>Hours: ${station.timetable}`);
+                .openPopup();
+        });            
     </script>
 </body>
 </html>
