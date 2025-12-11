@@ -28,32 +28,26 @@
         }).addTo(map);
 
         // Convert data.db rows to JSON objects
-        const stations = [
-            {% for station in stations %}
-            {
-                name: {{ station["name"] | tojson }},
-                address: {{ station["address"] | tojson }},
-                timetable: {{ station["timetable"] | tojson }},
-                latitud: {{ station["latitude"] }},
-                longitud: {{ station["longitude"] }},
-                gasoline95: {{ station["gasoline95"] }},
-                gasoline98: {{ station["gasoline98"] }},
-                diesel: {{ station["diesel"] }},
-                diesel_premium: {{ station["diesel_premium"] }},
-                dieselB: {{ station["dieselB"] }}
-            }{% if not loop.last %},{% endif %}
-            {% endfor %}
-        ];
+        const stations = {{ stations | tojson }};
 
         // Add markers for each station
         stations.forEach(station => {
-            if (!station.latitud || !station.longitud)
+            // Skip stations with missing coordinates
+            if (!station.latitude || !station.longitude)
                 return;
-            L.marker([station.latitud, station.longitud]).addTo(map)
+
+            L.marker([station.latitude, station.longitude]).addTo(map)
                 .bindPopup(`
-                <b>${station.name}</b>
-            `);
-        });            
+                    <b>${station.name}</b><br>
+                    ${station.address}<br>
+                    ${station.timetable || 'N/A'}<br>
+                    Gasolina 95: ${station.gasoline95 ?? 'N/A'}<br>
+                    Gasolina 98: ${station.gasoline98 ?? 'N/A'}<br>
+                    Diesel: ${station.diesel ?? 'N/A'}<br>
+                    Diesel Premium: ${station.diesel_premium ?? 'N/A'}<br>
+                    Diesel B: ${station.dieselB ?? 'N/A'}
+                `);
+        });
     </script>
 </body>
 </html>
