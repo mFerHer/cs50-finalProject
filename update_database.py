@@ -44,7 +44,7 @@ for station in stations:
 
     id = int(station["IDEESS"])        
     name = station["Rótulo"]
-    address = f"{station["Dirección"]}, {station["C.P."]}, {station["Localidad"]}, {station["Provincia"]}"
+    address = f"{station['Dirección']}, {station['C.P.']}, {station['Localidad']}, {station['Provincia']}"
     timetable = station["Horario"]
     latitude = float(station["Latitud"].replace(",", "."))
     longitude = float(station["Longitud (WGS84)"].replace(",", "."))
