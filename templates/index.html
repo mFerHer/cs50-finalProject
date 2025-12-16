@@ -38,18 +38,20 @@
                             <p class="lead">Última actualización: {{ last_update }}</p> 
                             <div>
                                 <!-- Route: starting point and destination regarding localidad -->
+                                <input type="text" id="origin-search" class="form-control mb-3" placeholder="Escribe el punto de partida">
                                 <select id="origin" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                     <option disabled selected>Selecciona punto de partida</option>
                                     {% for local in localities %} 
-                                        <option value="{{ local.locality }}" data-lat="{{ local.lat }}" data-lng="{{ local.lng }}">{{ local.locality }}</option>
+                                        <option value="{{ local.locality }}" data-lat="{{ local.lat }}" data-lng="{{ local.lng }}">{{ local.locality }}, {{ local.municipality }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div>
+                                <input type="text" id="destination-search" class="form-control mb-3" placeholder="Escribe el destino">
                                 <select id="destination" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                     <option disabled selected>Selecciona destino</option>
                                     {% for local in localities %}
-                                        <option value="{{ local.locality }}" data-lat="{{ local.lat }}" data-lng="{{ local.lng }}">{{ local.locality }}</option>
+                                        <option value="{{ local.locality }}" data-lat="{{ local.lat }}" data-lng="{{ local.lng }}">{{ local.locality }}, {{ local.municipality }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
