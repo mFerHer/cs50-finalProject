@@ -13,21 +13,23 @@ def index():
 
     # Get stations data
     curs.execute("SELECT * FROM info JOIN prices ON info.id = prices.id")
+    
     rows = curs.fetchall()
     stations = [dict(row) for row in rows]
 
     # Get last update
     curs.execute("SELECT value FROM metadata WHERE key = 'last_update'")
+
     row = curs.fetchone()
     last_update = row["value"] if row else "Unknown"
 
     # Get lat & lng for localities
-    curs.execute("SELECT locality, AVG(latitude) AS lat, AVG(longitude) AS lng \
-        FROM info \
+    curs.execute("SELECT locality, AVG(latitude) AS lat, AVG(longitude) AS lng FROM info \
         WHERE latitude IS NOT NULL \
             AND longitude IS NOT NULL \
         GROUP BY locality \
         ORDER BY locality")
+    
     localities = [dict(row) for row in curs.fetchall()]
 
 
