@@ -40,16 +40,16 @@
                                 <!-- Route: starting point and destination regarding localidad -->
                                 <select id="origin" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                     <option disabled selected>Selecciona punto de partida</option>
-                                    {% for station in stations %} 
-                                        <option value="{{ station.localidad }}" data-lat="{{ station.latitude }}" data-lng="{{ station.longitude }}">{{ station.localidad }}</option>
+                                    {% for local in localidades %} 
+                                        <option value="{{ local.localidades }}" data-lat="{{ local.lat }}" data-lng="{{ local.lng }}">{{ local.localidades }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div>
                                 <select id="destination" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                     <option disabled selected>Selecciona destino</option>
-                                    {% for station in stations %}
-                                        <option value="{{ station.localidad }}" data-lat="{{ station.latitude }}" data-lng="{{ station.longitude }}">{{ station.localidad }}</option>
+                                    {% for local in localidades %}
+                                        <option value="{{ local.localidades }}" data-lat="{{ local.lat }}" data-lng="{{ local.lng }}">{{ local.localidades }}</option>
                                     {% endfor %}
                                 </select>
                             </div>

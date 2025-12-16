@@ -10,6 +10,8 @@ curs.execute("""CREATE TABLE IF NOT EXISTS info (
              id INTEGER PRIMARY KEY NOT NULL,
              name TEXT NOT NULL,
              address TEXT NOT NULL,
+             locality TEXT,
+             municipality TEXT,
              timetable TEXT,
              latitude REAL NOT NULL,
              longitude REAL NOT NULL
@@ -51,19 +53,23 @@ for station in stations:
 
     id = int(station["IDEESS"])        
     name = station["Rótulo"]
-    address = f"{station['Dirección']}, {station['C.P.']}, {station['Localidad']}, {station['Provincia']}"
+    address = f"{station['Dirección']}, {station['C.P.']}"
+    locality = station["Localidad"]
+    municipality = station["Provincia"]
     timetable = station["Horario"]
     latitude = float(station["Latitud"].replace(",", "."))
     longitude = float(station["Longitud (WGS84)"].replace(",", "."))
-    curs.execute("""INSERT INTO info (id, name, address, timetable, latitude, longitude)
-    VALUES (?, ?, ?, ?, ?, ?)
+    curs.execute("""INSERT INTO info (id, name, address, locality, municipality, timetable, latitude, longitude)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(id) DO UPDATE SET
         name = excluded.name,
         address = excluded.address,
+        locality = excluded.locality,
+        municipality = excluded.municipality,
         timetable = excluded.timetable,
         latitude = excluded.latitude,
         longitude = excluded.longitude
-    """, (id, name, address, timetable, latitude, longitude))
+    """, (id, name, address, locality, municipality, timetable, latitude, longitude))
     
     gasoline95 = convert_price(station["Precio Gasolina 95 E5"])
     gasoline98 = convert_price(station["Precio Gasolina 98 E5"])
@@ -86,7 +92,6 @@ for station in stations:
         value = excluded.value
     """, ("last_update", datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")))
     
-    
+
 db.commit()
 db.close()
-

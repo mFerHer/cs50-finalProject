@@ -44,26 +44,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const origin = document.getElementById("origin");
     const dest = document.getElementById("destination");
 
-    console.log("route-btn:", routeBtn);
-
-    // HARD STOP if elements are missing
-    if (!routeBtn || !originSelect || !destinationSelect) {
-        console.warn("Routing elements not found. Skipping route setup.");
-        return;
-    }
-
     routeBtn.addEventListener("click", () => {
         origin.selectedOptions[0];
         dest.selectedOptions[0];
 
-        if (!origin || !dest) return;
+        if (!origin || !dest)
+            return;
 
         const originLat = parseFloat(origin.dataset.lat);
         const originLng = parseFloat(origin.dataset.lng);
         const destLat = parseFloat(dest.dataset.lat);
         const destLng = parseFloat(dest.dataset.lng);
 
-        if (!originLat || !originLng || !destLat || !destLng) return;
+        if (!originLat || !originLng || !destLat || !destLng) 
+            return;
 
         // Remove existing route if any
         if (routeLine) map.removeLayer(routeLine);
