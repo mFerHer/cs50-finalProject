@@ -24,15 +24,17 @@ def index():
     # Get lat & lng for localities
     curs.execute("SELECT locality, AVG(latitude) AS lat, AVG(longitude) AS lng \
         FROM info \
+        WHERE latitude IS NOT NULL \
+            AND longitude IS NOT NULL \
         GROUP BY locality \
         ORDER BY locality")
-    localidades = [dict(row) for row in curs.fetchall()]
+    localities = [dict(row) for row in curs.fetchall()]
 
 
     db.close()
 
 
-    return render_template("index.html", stations=stations, last_update=last_update, localidades=localidades)
+    return render_template("index.html", stations=stations, last_update=last_update, localities=localities)
 
 
 if __name__ == "__main__":

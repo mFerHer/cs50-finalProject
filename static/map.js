@@ -38,36 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     map.addLayer(clusters);
 
     // Add routing
-    let routeLine;
 
-    const routeBtn = document.getElementById("route-btn");
-    const origin = document.getElementById("origin");
-    const dest = document.getElementById("destination");
-
-    routeBtn.addEventListener("click", () => {
-        origin.selectedOptions[0];
-        dest.selectedOptions[0];
-
-        if (!origin || !dest)
-            return;
-
-        const originLat = parseFloat(origin.dataset.lat);
-        const originLng = parseFloat(origin.dataset.lng);
-        const destLat = parseFloat(dest.dataset.lat);
-        const destLng = parseFloat(dest.dataset.lng);
-
-        if (!originLat || !originLng || !destLat || !destLng) 
-            return;
-
-        // Remove existing route if any
-        if (routeLine) map.removeLayer(routeLine);
-
-        routeLine = L.polyline([[originLat, originLng], [destLat, destLng]], { color: "red" }).addTo(map);
-
-        const distance = map.distance([originLat, originLng], [destLat, destLng]) / 1000;
-        document.getElementById("route-distance").textContent = `Distancia: ${distance.toFixed(2)} km`;
-        
-        map.fitBounds(routeLine.getBounds());
-    });
 
 });
