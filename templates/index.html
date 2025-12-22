@@ -12,6 +12,8 @@
             <!-- Bootstrap JS -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+            <!-- Bootstrap icons -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
             <!-- Leaflet's CSS -->
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="crossorigin=""/>
             <!-- Leaflet's JS -->
@@ -27,32 +29,43 @@
             <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
         </head>
         <body>
-            <main> 
-                <div class="container col-xxl-8 px-4 py-5">
-                    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-                        <div class="col-10 col-sm-8 col-lg-6">
+            <header class="d-flex justify-content-between align-items-center py-2 mb-2 border-bottom">
+                <div class="container d-flex justify-content-between align-items-center">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                        <span id="title-icon" class="me-1">⛽</span>
+                        <div class="d-flex flex-column">
+                            <h1 class="fw-bold text-body-emphasis lh-1 mb-1">En Ruta</h1>
+                            <h3 class="fs-6 fw-semibold mb-0">Encuentra gasolineras en tu ruta</h3>
+                        </div>
+                    </a>
+                    <p class="lead">Última actualización: {{ last_update }}</p>
+                </div>
+            </header>
+            <main>
+                <div class="container py-2">
+                    <div class="row flex-lg-row-reverse align-items-center g-3 py-2">
+                        <div class="col-12 col-lg-8">
                             <div id="map"></div>
                         </div> 
-                        <div class="col-lg-6"> 
-                            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Encuentra gasolineras en tu ruta</h1>
-                            <p class="lead">Última actualización: {{ last_update }}</p> 
+                        <div class="col-12 col-lg-4">
                             <div>
+                                <h3 class="fw-bold text-body-emphasis">Tu ruta</h3>
                                 <datalist id="localities-list">
                                     {% for local in localities %}
                                         <option value="{{ local.locality }}">{{ local.municipality }}</option>
                                     {% endfor %}
                                 </datalist>
-                                <input type="text" id="origin" list="localities-list" class="form-control mb-3" placeholder="Elige el punto de partida">
+                                <input type="text" id="origin" list="localities-list" class="form-control mb-2" placeholder="Elige el punto de partida">
                             </div>
                             <div>
-                                <input type="text" id="destination" list="localities-list" class="form-control mb-3" placeholder="Elige el destino">
+                                <input type="text" id="destination" list="localities-list" class="form-control mb-2" placeholder="Elige el destino">
+                            </div>
+                            <div class="mb-3">
+                                <button id="route-btn" type="button" class="btn btn-primary">Mostrar ruta</button>
+                                <p id="route-distance" class="mt-2"></p>
                             </div>
                             <div>
-                                <button id="route-btn" type="button" class="btn btn-primary btn-lg px-4 me-md-2">Mostrar ruta</button>
-                                <p id="route-distance"></p>
-                            </div>
-                            <div>
-                                <h2>Mejor precio</h2>
+                                <h3 class="fw-bold text-body-emphasis">Mejor precio</h3>
                                 <select id="fuel-type" class="form-select mb-2">
                                     <option disabled selected>Selecciona el tipo de combustible</option>
                                     <option value="diesel">Diesel</option>
@@ -61,8 +74,8 @@
                                     <option value="gasoline95">Gasolina 95</option>
                                     <option value="gasoline98">Gasolina 98</option>
                                 </select>
-                                <button id="price-btn" type="button" class="btn btn-secondary">Mostrar mejor precio</button>
-                            </div> 
+                                <button id="price-btn" type="button" class="btn btn-primary">Mostrar mejor precio</button>
+                            </div>
                         </div> 
                     </div>
                 </div>
@@ -73,4 +86,18 @@
                 const localities = {{ localities | tojson }};
             </script>
         </body>
+        <div class="container"> 
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 my-3 border-top"> 
+                <div class="col-md-4 d-flex align-items-center">
+                    <span class="mb-3 mb-md-0 text-body-secondary">María FHdez, 2025 © CS50 Final Project</span> 
+                </div> 
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> 
+                    <li class="ms-3">
+                        <a class="text-body-secondary d-flex align-items-center" href="https://github.com/mFerHer" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+                            <i class="bi bi-github fs-4 me-2"></i>
+                        </a>
+                    </li>
+                </ul> 
+            </footer> 
+        </div>
     </html>

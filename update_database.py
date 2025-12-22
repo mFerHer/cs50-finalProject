@@ -90,7 +90,7 @@ for station in stations:
     VALUES (?, ?)
     ON CONFLICT(key) DO UPDATE SET
         value = excluded.value
-    """, ("last_update", datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")))
+    """, ("last_update", datetime.utcnow().strftime("%d-%m-%Y · %H:%M:%S UTC")))
     
 
 db.commit()

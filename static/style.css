@@ -1,6 +1,11 @@
 #map {
     height: 500px;
     width: 100%;
+    border-radius: 8px;
+}
+
+#title-icon {
+    font-size: 3rem;
 }
 
 .station-icon {
@@ -12,20 +17,32 @@
 .marker-cluster-medium,
 .marker-cluster-large {
     background-color: grey !important;
+    z-index: 100 !important;
 }
 
 .marker-cluster-small div,
 .marker-cluster-medium div,
 .marker-cluster-large div {
     background-color: rgba(158, 99, 105, 0.694) !important;
+    z-index: 100 !important;
 }
 
 .location-icon {
     font-size: 25px;
     line-height: 25px;
+    z-index: 110 !important;
 }
 
 .highlight-icon {
     font-size: 30px;
     line-height: 30px;
+    z-index: 110 !important;
+}
+
+#route-btn {
+    background-color: #5c85d6;
+}
+
+#price-btn {
+    background-color: #ffd633;
 }

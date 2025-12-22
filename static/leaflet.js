@@ -148,9 +148,16 @@ document.addEventListener("DOMContentLoaded", () => {
             // Display first route (fastest)
             const route = e.routes[0];
             const km = (route.summary.totalDistance / 1000).toFixed(1);
-            const min = Math.round(route.summary.totalTime / 60);
+            const hours = Math.floor(route.summary.totalTime / 3600);
+            const minutes = Math.round((route.summary.totalTime % 3600) / 60);
+            let timeText;
+            if (hours > 0) {
+                timeText = `${hours} h ${minutes} min`;
+            } else {
+                timeText = `${minutes} min`;
+            }
             document.getElementById("route-distance").textContent =
-                `Distance: ${km} km · Time: ${min} min`;
+                `Distancia: ${km} km · Tiempo: ${timeText}`;
 
             // (Store lastRoute for later use in step 5)
             lastRoute = route.coordinates;
