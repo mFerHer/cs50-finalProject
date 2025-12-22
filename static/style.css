@@ -41,8 +41,11 @@
 
 #route-btn {
     background-color: #5c85d6;
+    color: black;
 }
 
 #price-btn {
-    background-color: #ffd633;
+    background-color: #ffdb4d;
+    color: black;
+    border-color: #ffd633;
 }

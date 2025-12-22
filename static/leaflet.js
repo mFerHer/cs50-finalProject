@@ -1,3 +1,13 @@
+/*
+External resources used during development:
+- Leaflet official documentation and tutorials: used for map initialization, marker clustering, and routing concepts.
+- YouTube tutorials: consulted for general Flask–Leaflet integration patterns.
+- W3Schools: reference for JavaScript, HTML, and CSS syntax and usage.
+- ChatGPT: used for conceptual guidance, debugging assistance, and code structure suggestions.
+- GitHub Copilot: autocomplete suggestions and inline code assistance during development.
+*/
+
+
 // Execute after DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
 

@@ -1,3 +1,14 @@
+"""
+External resources used during development:
+- Leaflet official documentation and tutorials: used for map initialization, marker clustering, and routing concepts.
+- YouTube tutorials: consulted for general Flask integration patterns.
+- W3Schools: reference for web development syntax and examples.
+- ChatGPT: used for conceptual guidance, debugging assistance, and code structure suggestions.
+- GitHub Copilot: autocomplete suggestions and inline code assistance during development.
+
+"""
+
+
 from flask import Flask, render_template
 import sqlite3
 
